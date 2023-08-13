@@ -16,39 +16,43 @@ public class BOJ2178_미로탐색 {
 		StringTokenizer stk = new StringTokenizer(str);
 		N = Integer.parseInt(stk.nextToken());
 		M = Integer.parseInt(stk.nextToken());
+		int row = 0, col = 0, rank = 1;
 		
-		map = new boolean[N][M];
+		map = new boolean[N][M];	//true:길, false:벽
+		ArrayDeque<int[]> BFS = new ArrayDeque<>();
 		
 		for(int i = 0; i < N; i++) {
 			str = br.readLine();
 			for(int j = 0; j < M; j++) {
-				if(str.charAt(j)-'0' == 0) {
+				if(str.charAt(j)-'0' == 1) {
 					map[i][j] = true;
 				}				
 			}
 		}
 		
-		DFS(0,0,1);
+		BFS.add(new int[] {row,col,rank});
 		
-		System.out.println(min);		
-	}
-	
-	private static void DFS(int row, int col, int count){
-		if(map[row][col]) return;
-		if(min == N+M-1) return;
-		if(row == N-1 && col == M-1) {
-			if(count < min) min = count;
-			return;
+		while(true) {
+			int[] now = BFS.poll();
+			row = now[0];
+			col = now[1];
+			rank = now[2];
+
+			if(row == N-1 && col == M-1) {
+				min = rank;
+				break;
+			}
+
+			map[row][col] = false;
+
+			if(row < N-1 && map[row+1][col]) BFS.add(new int[] {row+1, col, rank+1});	//아래
+			if(col < M-1 && map[row][col+1]) BFS.add(new int[] {row, col+1, rank+1});	//오른쪽
+			if(row > 0 && map[row-1][col]) BFS.add(new int[] {row-1, col, rank+1});	//위
+			if(col > 0 && map[row][col-1]) BFS.add(new int[] {row, col-1, rank+1});	//왼쪽
+			
 		}
 		
-		map[row][col] = true;
-		
-		if(row > 0)	DFS(row-1, col, count+1); //up
-		if(row < N-1) DFS(row+1, col, count+1); //down
-		if(col > 0) DFS(row, col-1, count+1); //left
-		if(col < M-1) DFS(row, col+1, count+1); // right
-		
-		map[row][col] = false;
+		System.out.println(min);		
 	}
 
 }
