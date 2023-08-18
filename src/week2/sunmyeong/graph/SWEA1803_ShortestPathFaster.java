@@ -79,7 +79,7 @@ class Graph {
 			
 			if(min_index == -1) break;
 			visited[min_index] = true;
-			
+			 
 			for(int i = 0 ; i < n; i++) {
 				if(!visited[i] && map[min_index][i] != Integer.MAX_VALUE) {
 					if(distance[min_index]+map[min_index][i] < distance[i]) {
