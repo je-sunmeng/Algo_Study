@@ -1,4 +1,4 @@
-package week2.sunmyeong.graph;
+package week3.sunmyeong;
 
 import java.io.*;
 import java.util.*;
