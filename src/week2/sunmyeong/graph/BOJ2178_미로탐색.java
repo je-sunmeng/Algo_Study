@@ -58,7 +58,7 @@ public class BOJ2178_미로탐색 {
 			for(int dir = 0; dir < 4; dir++) {
 				nr = row+dr[dir];
 				nc = col+dc[dir];
-				if(nr<0||nr>N-1||nc<0||nc>M-1||!map[nr][nc]) continue;
+				if(nr<0||nr>N-1||nc<0||nc>M-1||!map[nr][nc]) continue;	//map외부 또는 이미 방문한 곳이라면 continue
 				map[nr][nc] = false;	//이곳에 넣어야 메모리 초과가 나지 않음
 				BFS.add(new Pos(nr, nc, now.rank+1));
 			}
