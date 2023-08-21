@@ -1,13 +1,13 @@
 /*
  * https://www.acmicpc.net/problem/17952
- * 메모리 	205516KB
+ * 메모리 205516KB
  * 실행시간 1140ms
  */
 
 import java.io.*;
 import java.util.*;
 
-public class BOJ17925_과제는끝나지않아 {
+public class BOJ17952_과제는끝나지않아 {
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));	//버퍼드리더 호출
