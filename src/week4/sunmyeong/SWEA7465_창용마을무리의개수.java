@@ -29,7 +29,7 @@ public class SWEA7465_창용마을무리의개수 {
 		int bRoot = find(b);
 		if(aRoot == bRoot) return false;
 		parents[bRoot] = aRoot;
-		N--;
+		N--;	// 무리의 개수 감소
 		return true;
 	}
 	
@@ -50,10 +50,10 @@ public class SWEA7465_창용마을무리의개수 {
 			for(int i = 0; i < M; i++) {
 				str = br.readLine();
 				stk = new StringTokenizer(str);
-				int a = Integer.parseInt(stk.nextToken())-1;
-				int b = Integer.parseInt(stk.nextToken())-1;
+				int a = Integer.parseInt(stk.nextToken())-1;	// a사람과
+				int b = Integer.parseInt(stk.nextToken())-1;	// b사람을
 				
-				union(a, b);
+				union(a, b);	// 같은 무리로 묶음
 			}
 			sb.append("#").append(test).append(" ").append(N).append("\n");
 		}
