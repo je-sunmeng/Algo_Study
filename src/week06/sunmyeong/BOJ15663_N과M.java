@@ -6,7 +6,7 @@ import java.util.*;
 public class BOJ15663_N과M {
 	static int N, M;
 	static String result[];
-	static List<String> nums;
+	static List<Integer> nums;
 	static String tmp;
 	static StringBuilder sb = new StringBuilder();
 	static Set<String> set = new LinkedHashSet<>();
@@ -28,7 +28,7 @@ public class BOJ15663_N과M {
 		
 		for(int i = 0 ; i < nums.size(); i++) {
 			if((flag & 1<<i)!=0) continue;
-			result[cnt] = nums.get(i);
+			result[cnt] = Integer.toString(nums.get(i));
 			Per(cnt+1, flag|1<<i);
 			if(cnt > 0 && result[cnt-1] == result[cnt]) flag |= 1<<(i+1);
 		}
@@ -48,7 +48,7 @@ public class BOJ15663_N과M {
 		str = br.readLine();
 		stk = new StringTokenizer(str);
 		for(int i = 0; i < N; i++) {
-			nums.add(stk.nextToken());
+			nums.add(Integer.parseInt(stk.nextToken()));
 		}
 		Collections.sort(nums);
 		
