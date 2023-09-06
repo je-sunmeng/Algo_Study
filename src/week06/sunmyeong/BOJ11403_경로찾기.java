@@ -1,3 +1,8 @@
+/*
+ * 메모리 14192KB
+ * 실행시간 136ms
+ */
+
 package week06.sunmyeong;
 
 import java.io.*;
@@ -5,20 +10,21 @@ import java.util.*;
 
 public class BOJ11403_경로찾기 {
 	
-	static int result[][];
+	static int result[][], from;
 	static List<Integer> adjList[];
 	
-	public static void DFS(int i, int j) {		
-		for(int n = 0; n < adjList[j].size(); n++) {
-			if(result[i][adjList[j].get(n)] == 1) continue;
-			result[i][adjList[j].get(n)] = 1;
-			DFS(i, adjList[j].get(n));
+	public static void DFS(int i) {		
+		for(int n = 0; n < adjList[i].size(); n++) {
+			if(result[from][adjList[i].get(n)] == 1) continue;
+			result[from][adjList[i].get(n)] = 1;
+			DFS(adjList[i].get(n));
 		}
 	}
 	
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader  br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		
 		int N = Integer.parseInt(br.readLine());
 		result = new int[N][N];
@@ -34,19 +40,19 @@ public class BOJ11403_경로찾기 {
 			}
 		}
 		
-		for(int i = 0; i < N; i++) {
-			if(!adjList[i].isEmpty()) {
-				result[i][adjList[i].get(0)] = 1;
-				DFS(i, adjList[i].get(0));
+		for(from = 0; from < N; from++) {
+			if(!adjList[from].isEmpty()) {
+				DFS(from);
 			}
 		}
 		
 		for(int i = 0; i < N; i++) {
 			for(int j = 0; j < N; j++) {
-				System.out.print(result[i][j] +" ");
+				sb.append(result[i][j]).append(" ");
 			}
-			System.out.println();
+			sb.append("\n");
 		}
+		System.out.println(sb);
 	}
 
 }
