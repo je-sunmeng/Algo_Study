@@ -1,3 +1,8 @@
+/*
+ * 메모리 13260KB
+ * 실행시간 112ms
+ */
+
 package week07.sunmyeong;
 
 import java.io.*;
@@ -6,12 +11,12 @@ import java.util.*;
 public class BOJ2630_색종이만들기 {
 	static int map[][], W=0, B=0;
 	
-	public static void Divide(int rs, int re, int cs, int ce) {
-		if(rs+1 == re || cs+1 == ce) return;
-		int index = map[rs][cs];
+	public static void Divide(int row, int col, int len) {
+		if(len == 0) return;
+		int index = map[row][col];
 		boolean flag = false;
-		go: for(int i = rs; i < re; i++) {
-			for(int j = cs; j < ce; j++) {
+		go: for(int i = row; i < row+len; i++) {
+			for(int j = col; j < col+len; j++) {
 				if(map[i][j] != index) {
 					flag = true;
 					break go;
@@ -24,10 +29,10 @@ public class BOJ2630_색종이만들기 {
 			else B++;
 			return;
 		}
-		Divide(rs, re/2, cs, ce/2);
-		Divide(re/2, re, cs, ce/2);
-		Divide(rs, re/2, ce/2, ce);
-		Divide(re/2, re, ce/2, ce);
+		Divide(row,col,len/2);
+		Divide(row,col+len/2,len/2);
+		Divide(row+len/2,col,len/2);
+		Divide(row+len/2,col+len/2,len/2);
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -44,7 +49,7 @@ public class BOJ2630_색종이만들기 {
 			}
 		}
 		
-		Divide(0, N, 0, N);
+		Divide(0, 0, N);
 		
 		System.out.println(W);
 		System.out.println(B);
