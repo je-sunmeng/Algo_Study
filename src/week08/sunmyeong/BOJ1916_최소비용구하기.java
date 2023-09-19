@@ -37,16 +37,17 @@ public class BOJ1916_최소비용구하기 {
 		boolean[] visited = new boolean[N];
 		Arrays.fill(dis, Integer.MAX_VALUE);
 		
-		Queue<Integer> que = new ArrayDeque<>();
+		Queue<Node> que = new ArrayDeque<>();
 		
 		dis[start] = 0;
 		visited[start] = true;
-		que.offer(start);
+		que.offer(new Node(start, 0));
 		int minIndex, cur = start;
 		
 		while(true) {
-			int nxt = que.poll();
-			if(dis[nxt] >  )
+			Node next = que.poll();
+			if(dis[next.nxt] > next.weight) dis[next.nxt] = next.weight;
+			else dis[next.nxt] += next.weight;
 		}
 		
 		
