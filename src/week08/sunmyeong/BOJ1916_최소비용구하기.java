@@ -1,3 +1,8 @@
+/*
+ * 메모리 	46088KB
+ * 실행시간 356ms
+ */
+
 package week08.sunmyeong;
 
 import java.io.*;
@@ -25,33 +30,45 @@ public class BOJ1916_최소비용구하기 {
 		for(int i = 0; i < M; i++) {
 			String str = br.readLine();
 			StringTokenizer stk = new StringTokenizer(str);
-			adjList[Integer.parseInt(stk.nextToken())-1].add(new Node(Integer.parseInt(stk.nextToken())-1, Integer.parseInt(stk.nextToken())-1));
+			int cur = Integer.parseInt(stk.nextToken())-1;
+			int nxt = Integer.parseInt(stk.nextToken())-1;
+			int weight = Integer.parseInt(stk.nextToken());
+			adjList[cur].add(new Node(nxt, weight));
 		}
 		
 		String str = br.readLine();
 		StringTokenizer stk = new StringTokenizer(str);
-		int start = Integer.parseInt(stk.nextToken());
-		int end = Integer.parseInt(stk.nextToken()); 
+		int start = Integer.parseInt(stk.nextToken())-1;
+		int end = Integer.parseInt(stk.nextToken())-1; 
 		
-		int dis[] = new int[N];
+		int dist[] = new int[N];
 		boolean[] visited = new boolean[N];
-		Arrays.fill(dis, Integer.MAX_VALUE);
-		
-		Queue<Node> que = new ArrayDeque<>();
-		
-		dis[start] = 0;
-		visited[start] = true;
-		que.offer(new Node(start, 0));
-		int minIndex, cur = start;
-		
-		while(true) {
-			Node next = que.poll();
-			if(dis[next.nxt] > next.weight) dis[next.nxt] = next.weight;
-			else dis[next.nxt] += next.weight;
+		Arrays.fill(dist, Integer.MAX_VALUE);
+
+		dist[start] = 0;
+
+		for(int i = 0; i < N; i++) {
+			int min = Integer.MAX_VALUE;
+			int minIndex = -1;
+			for(int j = 0; j < N; j++) {
+				if(!visited[j] && dist[j] < min) {
+					min = dist[j];
+					minIndex = j;
+				}
+			}
+			if(minIndex == -1) break;
+			visited[minIndex] = true;
+			
+			for(int j = 0; j < adjList[minIndex].size(); j++) {
+				Node tmp = adjList[minIndex].get(j);
+				
+				if(dist[tmp.nxt] > dist[minIndex]+tmp.weight) {
+					dist[tmp.nxt] = dist[minIndex]+tmp.weight;
+				}
+			}
 		}
 		
-		
-		
+		System.out.println(dist[end]);
 
 	}
 
